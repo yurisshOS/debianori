@@ -1,0 +1,67 @@
+wget http://aemrhabibin.tk:81/Script/aemrhabibincentos6ovz.sh
+bash aemrhabibincentos6ovz.sh
+reboot
+
+wget http://aemrhabibin.tk:81/Script/aemrhabibincentos6kvm.sh
+bash aemrhabibincentos6kvm.sh
+reboot
+
+wget http://aemrhabibin.tk:81/Script/aemrcentos6ovz.sh
+bash aemrcentos6ovz.sh
+reboot
+
+wget http://aemrhabibin.tk:81/Script/Debian/debian7aemrhabibin.sh
+bash debian7aemrhabibin.sh
+reboot
+
+
+wget http://aemrhabibin.tk:81/Script/user-login.sh
+chmod +x user-login.sh
+./user-login.sh
+
+wget http://aemrhabibin.tk:81/Script/Debian/user-login.sh
+chmod +x user-login.sh
+./user-login.sh
+
+cd /etc/webmin >> nano miniserv.conf >> cari ssl=1 ganti dengan ssl=0
+Now try to access Webmin using URL http://SERVER IP ADDRESS:10000/
+law mau di ubah https:// webmin k http://
+
+cp /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
+law mau ganti time ke JKT
+
+DROPBEAR : nano /etc/sysconfig/dropbear  | nano /etc/default/dropbear
+OPTIONS="-b /etc/ssh/banner -p 443" | DROPBEAR_BANNER="/etc/ssh/banner"
+OPENSHH : nano /etc/ssh/sshd_config
+edit bagian Banner /etc/ssh/banner
+BANNER : nano /etc/ssh/banner
+------------------------------------------------
+	     Selamat Datang di SG.GS
+------------------------------------------------
+ 1. Dilarang DDOS Server !
+ 2. Dilarang Download Menggunakan Torrent !
+ 3. Dilarang Multi-Login !
+
+ Jika Melanggar Akun Akan di-Suspend(Hapus) !!!
+
+ Kalau Mau Ganti Password Silahkan Kontak Admin
+ MAX : 3X
+
+  -------
+ |By Aemr| 	FB 	: amruddin.udin
+  -------	TW 	: amruddin_udin
+	  	PIN 	: 28CE7A5C
+	  	HP	: 089681344775
+
+  --------
+ |By Elfin| 	FB 	: elfin.bachdim
+  --------	TW 	: elfinhabibin
+	  	PIN 	: 26A6B593
+	  	HP	: 08974849144
+service dropbear restart
+service sshd restart  | service ssh restart
+Ket : Stlah baris | sintakx Debian.
+
+echo "0 0 * * * root /usr/bin/reboot" > /etc/cron.d/reboot
+law mau restart vps stiap 1 hari skali.
+
