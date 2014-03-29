@@ -16,8 +16,8 @@ sed -i '$ i\echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6' /etc/rc.local
 # install wget and curl
 apt-get update;apt-get -y install wget curl;
 
-# set time GMT +8
-ln -fs /usr/share/zoneinfo/Asia/Makassar /etc/localtime
+# set time GMT +7
+ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
 
 # set locale
 sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
@@ -95,8 +95,8 @@ cd /etc/openvpn/
 wget -O /etc/openvpn/1194-client.ovpn "http://aemrhabibin.tk:81/Script/Debian/1194-client.conf"
 sed -i $MYIP2 /etc/openvpn/1194-client.ovpn;
 PASS=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 15 | head -n 1`;
-useradd -M -s /bin/false AemrHabibin
-echo "AemrHabibin:$PASS" | chpasswd
+useradd -M -s /bin/false YurisshOS
+echo "YurisshOS:$PASS" | chpasswd
 echo "username" > pass.txt
 echo "password" >> pass.txt
 tar cf client.tar 1194-client.ovpn pass.txt
@@ -141,8 +141,9 @@ service ssh restart
 apt-get -y install dropbear
 sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
 sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=443/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 109 -p 110"/g' /etc/default/dropbear
+sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS=""/g' /etc/default/dropbear
 echo "/bin/false" >> /etc/shells
+echo "/usr/sbin/nologin" >> /etc/shells
 service ssh restart
 service dropbear restart
 
@@ -171,10 +172,10 @@ service squid3 restart
 
 # install webmin
 cd
-wget "http://aemrhabibin.tk:81/Script/Debian/webmin_1.670_all.deb"
-dpkg --install webmin_1.670_all.deb;
+wget "http://prdownloads.sourceforge.net/webadmin/webmin_1.680_all.deb"
+dpkg --install webmin_1.680_all.deb;
 apt-get -y -f install;
-rm /root/webmin_1.670_all.deb
+rm /root/webmin_1.680_all.deb
 service webmin restart
 service vnstat restart
 
@@ -202,14 +203,15 @@ service webmin restart
 
 # info
 clear
-echo "www.aemrhabibin.tk" | tee log-install.txt
-echo "===============================================" | tee -a log-install.txt
+echo ""  | tee -a log-install.txt
+echo "AUTOSCRIPT INCLUDE" | tee log-install.txt
+echo "============================" | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
 echo "Service"  | tee -a log-install.txt
 echo "-------"  | tee -a log-install.txt
 echo "OpenVPN  : TCP 1194 (client config : http://$MYIP:81/client.tar)"  | tee -a log-install.txt
 echo "OpenSSH  : 22, 80, 143"  | tee -a log-install.txt
-echo "Dropbear : 109, 110, 443"  | tee -a log-install.txt
+echo "Dropbear : 443"  | tee -a log-install.txt
 echo "Squid3   : 8080 (limit to IP SSH)"  | tee -a log-install.txt
 echo "badvpn   : badvpn-udpgw port 7300"  | tee -a log-install.txt
 echo "nginx    : 81"  | tee -a log-install.txt
@@ -230,22 +232,17 @@ echo "./ps_mem.py"  | tee -a log-install.txt
 echo "./speedtest_cli.py --share"  | tee -a log-install.txt
 echo "./bench-network.sh"  | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
-echo "Account Default (utk SSH dan VPN)"  | tee -a log-install.txt
-echo "---------------"  | tee -a log-install.txt
-echo "User     : AemrHabibin"  | tee -a log-install.txt
-echo "Password : $PASS"  | tee -a log-install.txt
-echo ""  | tee -a log-install.txt
 echo "Fitur lain"  | tee -a log-install.txt
 echo "----------"  | tee -a log-install.txt
 echo "Webmin   : https://$MYIP:10000/"  | tee -a log-install.txt
 echo "vnstat   : http://$MYIP:81/vnstat/"  | tee -a log-install.txt
 echo "MRTG     : http://$MYIP:81/mrtg/"  | tee -a log-install.txt
-echo "Timezone : Asia/Makassar"  | tee -a log-install.txt
+echo "Timezone : Asia/Jakarta"  | tee -a log-install.txt
 echo "Fail2Ban : [on]"  | tee -a log-install.txt
 echo "IPv6     : [off]"  | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
 echo "Log Installasi --> /root/log-install.txt"  | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
-echo "SILAHKAN REBOOT VPS ANDA !"  | tee -a log-install.txt
+echo "SILAHKAN REBOOT VPS ANDA"  | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
 echo "==============================================="  | tee -a log-install.txt
