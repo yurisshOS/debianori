@@ -103,7 +103,7 @@ wget -O /etc/openvpn/1194-client.ovpn "https://raw.github.com/yurisshOS/debianor
 sed -i $MYIP2 /etc/openvpn/1194-client.ovpn;
 PASS=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 15 | head -n 1`;
 useradd -M -s /bin/false YurisshOS
-echo "YurisshOS:$PASS" | chpasswd
+echo "eonekileersOS:$PASS" | chpasswd
 echo "username" > pass.txt
 echo "password" >> pass.txt
 tar cf client.tar 1194-client.ovpn pass.txt
@@ -250,6 +250,6 @@ echo "IPv6     : [off]"  | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
 echo "Log Installasi --> /root/log-install.txt"  | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
-echo "SILAHKAN REBOOT VPS ANDA"  | tee -a log-install.txt
+echo "REBOOT VPS ANDA"  | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
-echo "==============================================="  | tee -a log-install.txt
+echo "==================
