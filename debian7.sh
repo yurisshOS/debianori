@@ -186,14 +186,99 @@ rm /root/webmin_1.680_all.deb
 service webmin restart
 service vnstat restart
 
-# downlaod script
+# User Status
 cd
-wget -O speedtest_cli.py "https://raw.github.com/sivel/speedtest-cli/master/speedtest_cli.py"
-wget -O bench-network.sh "https://raw.github.com/yurisshOS/debianori/master/bench-network.sh"
+wget http://vpsaio.ga/Debian7/user-list
+mv ./user-list /usr/local/bin/user-list
+chmod +x /usr/local/bin/user-list
+
+# Install Dos Deflate
+apt-get -y install dnsutils dsniff
+wget http://vpsaio.ga/Debian7/ddos-deflate-master.zip
+unzip master.zip
+cd ddos-deflate-master
+./install.sh
+cd
+
+# Install SPEED tES
+apt-get install python
+wget http://vpsaio.ga/Debian7/config/speedtest.py
+chmod +x speedtest.py
+
+# instal menu trial
+cd
+wget http://vpsaio.ga/Debian7/config/trial
+mv ./trial /usr/bin/trial
+chmod +x /usr/bin/trial
+
+# instal buatakun
+cd
+wget http://vpsaio.ga/Debian7/config/buatakun
+mv ./buatakun /usr/bin/buatakun
+chmod +x /usr/bin/buatakun
+
+# instal tendang
+cd
+wget http://vpsaio.ga/Debian7/config/tendang
+mv ./tendang /usr/bin/tendang
+chmod +x /usr/bin/tendang
+
+# instal Penggunaan Data VPS Oleh Akun SSH/VPN
+cd
 wget -O ps_mem.py "https://raw.github.com/pixelb/ps_mem/master/ps_mem.py"
-chmod +x bench-network.sh
-chmod +x speedtest_cli.py
-chmod +x ps_mem.py
+cp /root/ps_mem.py /usr/bin/usedram
+chmod +x /usr/bin/usedram
+
+# instal autodel
+cd
+wget http://vpsaio.ga/Debian7/config/autodel
+mv ./autodel /usr/bin/autodel
+chmod +x /usr/bin/autodel
+
+# Install Monitor
+cd
+wget http://vpsaio.ga/Debian7/monssh; mv monssh /usr/local/bin/; chmod +x /usr/local/bin/monssh
+
+
+# Install Menu
+cd
+wget http://vpsaio.ga/Debian7/menu
+mv ./menu /usr/local/bin/menu
+chmod +x /usr/local/bin/menu
+
+# moth
+cd
+wget http://vpsaio.ga/Debian7/motd
+mv ./motd /etc/motd
+
+# download script
+cd
+wget -O user-expired.sh "https://raw.githubusercontent.com/ForNesiaFreak/FNS_Debian7/fornesia.com/freak/user-expired.sh"
+echo "0 0 * * * root /root/user-expired.sh" > /etc/cron.d/user-expired
+echo "0 0 * * * root /usr/bin/reboot" > /etc/cron.d/reboot service cron restart
+echo "* * * * * service dropbear restart" > /etc/cron.d/dropbear
+chmod +x user-expired.sh
+chmod +x autodel.sh
+
+
+# Restart Service
+chown -R www-data:www-data /home/vps/public_html
+service nginx start
+service php-fpm start
+service vnstat restart
+service openvpn restart
+service ssh restart
+service dropbear restart
+service fail2ban restart
+service squid3 restart
+service webmin restart
+
+#rip
+cd
+rm debian32.sh
+rm ip.txt
+rm debian7
+rm debian7.sh
 
 # finalisasi
 chown -R www-data:www-data /home/vps/public_html
